@@ -1,15 +1,12 @@
 import socket
+from conf import HOST, PORT, BACKLOG, SIZE
 
-host = ''
-port = 50000
-backlog = 5
-size = 1024
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind((host, port))
-s.listen(backlog)
-while 1:
+s.bind((HOST, PORT))
+s.listen(BACKLOG)
+while True:
     client, address = s.accept()
-    data = client.recv(size)
+    data = client.recv(SIZE)
     if data:
         print "receving data"
         client.send(data)

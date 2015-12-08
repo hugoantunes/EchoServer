@@ -1,15 +1,8 @@
-"""
-A simple echo client
-"""
-
 import socket
+from conf import HOST, PORT, SIZE
 
-host = 'localhost'
-port = 50000
-size = 1024
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((host, port))
+s.connect((HOST, PORT))
 s.send('Hello, world')
-data = s.recv(size)
-s.close()
+data = s.recv(SIZE)
 print 'Received:', data
