@@ -34,7 +34,7 @@ while inputs:
                 if s not in outputs:
                     outputs.append(s)
             else:
-                print 'closing', client_address, 'after reading no data'
+                print 'closing socket after reading no data'
                 inputs.remove(s)
                 s.close()
                 del message_queues[s]
