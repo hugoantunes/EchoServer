@@ -1,8 +1,9 @@
 import socket
-from conf import HOST, PORT, SIZE
+from conf import ADDRESS, SIZE
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((HOST, PORT))
-s.send('Hello, world')
-data = s.recv(SIZE)
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.connect(ADDRESS)
+
+server.send('Hello, world')
+data = server.recv(SIZE)
 print 'Received:', data

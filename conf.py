@@ -2,3 +2,4 @@ HOST = 'localhost'
 PORT = 8000
 SIZE = 1024
 BACKLOG = 5
+ADDRESS = (HOST, PORT)

@@ -1,11 +1,14 @@
 import socket
-from conf import HOST, PORT, BACKLOG, SIZE
+from conf import ADDRESS, BACKLOG, SIZE
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind((HOST, PORT))
-s.listen(BACKLOG)
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.setblocking(0)
+
+server.bind(ADDRESS)
+server.listen(BACKLOG)
+
 while True:
-    client, address = s.accept()
+    client, address = server.accept()
     data = client.recv(SIZE)
     if data:
         print "receving data"
