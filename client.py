@@ -4,6 +4,9 @@ from conf import ADDRESS, SIZE
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.connect(ADDRESS)
 
-server.send('Hello, world')
+server.send('''
+    Hello, world
+    Nice to meet you!
+''')
 data = server.recv(SIZE)
-print 'Received:', data
+print data
