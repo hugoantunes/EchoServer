@@ -33,23 +33,21 @@ while inputs:
                 message_queues[s].put(data)
                 if s not in outputs:
                     outputs.append(s)
-                else:
-                    print 'closing', client_address, 'after reading no data'
-                    if s in outputs:
-                        outputs.remove(s)
-                    inputs.remove(s)
-                    s.close()
-                    del message_queues[s]
+            else:
+                print 'closing', client_address, 'after reading no data'
+                inputs.remove(s)
+                s.close()
+                del message_queues[s]
 
     for s in writable:
         try:
             next_msg = message_queues[s].get_nowait()
-        except Queue.Empty:
-            print 'output queue for', s.getpeername(), 'is empty'
-            outputs.remove(s)
-        else:
             print 'sending to %s' % str(s.getpeername())
             s.send(next_msg)
+        except Queue.Empty:
+            print 'output queue for', s.getpeername(), 'is empty'
+
+        outputs.remove(s)
 
     for s in exceptional:
         print 'handling exceptional condition for', s.getpeername()
